@@ -1,5 +1,8 @@
 import React from 'react';
-import { MD3LightTheme as DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import {
+  MD3LightTheme as DefaultTheme,
+  PaperProvider,
+} from 'react-native-paper';
 import AppNavigator from './src/AppNavigator';
 
 const theme = {
@@ -16,7 +19,7 @@ const theme = {
 
 export default function App() {
   return (
-    <PaperProvider theme={theme}>
+    <PaperProvider theme={theme}>      
       <AppNavigator />
     </PaperProvider>
   );

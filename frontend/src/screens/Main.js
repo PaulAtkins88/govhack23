@@ -1,29 +1,31 @@
 import React from 'react';
-import { View, StyleSheet, FlatList, TouchableOpacity, ImageBackground } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  ImageBackground,
+} from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 
 const Main = ({ navigation }) => {
-
   //Hardcode some items for now
-  const items = [ 'One' , 'Two', 'Three']
-  
-
+  const items = ['One', 'Two', 'Three'];
 
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => console.log(item)}>
       <Card style={styles.card} onPress={() => console.log(item)}>
-          <Title style={styles.title}>{item}</Title>
-          <Paragraph style={styles.paragraph}>{formatDate(item)}</Paragraph>
+        <Title style={styles.title}>{item}</Title>
+        <Paragraph style={styles.paragraph}>{item}</Paragraph>
       </Card>
     </TouchableOpacity>
   );
-
 
   return (
     <View style={styles.container}>
       <View style={styles.listWrapper}>
         <FlatList
-          data={dwellings}
+          data={items}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.flatList}
@@ -67,7 +69,8 @@ const styles = StyleSheet.create({
     textShadowRadius: 1, // Add text shadow
   },
 
-  createdAtText: { // Style for created at text
+  createdAtText: {
+    // Style for created at text
     color: '#777',
     fontSize: 12,
     textAlign: 'right',
@@ -83,8 +86,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     marginBottom: 10, // Add margin to the bottom of the FlatList
   },
-
 });
-
 
 export default Main;

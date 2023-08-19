@@ -1,19 +1,19 @@
-import { createStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import Main from './screens/Main';
 
 const AppNavigator = createStackNavigator(
-    {
-      Main: {
-        screen: Main,
-        navigationOptions: {
-          headerShown: false,
-        },
+  {
+    Main: {
+      screen: Main,
+      navigationOptions: {
+        headerShown: false,
       },
     },
-    {
-      initialRouteName: 'Main',
-    }
-  );
-  
-  export default createAppContainer(AppNavigator);
+  },
+  {
+    initialRouteName: 'Main',
+  }
+);
+
+export default createAppContainer(AppNavigator);

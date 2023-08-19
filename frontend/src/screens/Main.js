@@ -1,14 +1,20 @@
-import React from 'react';
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  ImageBackground,
-} from 'react-native';
-import { Card, Title, Paragraph } from 'react-native-paper';
+import { StatusBar } from 'expo-status-bar';
+import React, { useState } from 'react';
+import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Card, Paragraph, Text, Title, useTheme } from 'react-native-paper';
+import LocationInputs from '../../components/locationInputs/locationInputs.component';
 
 const Main = ({ navigation }) => {
+  const theme = useTheme();
+  const [currentLocation, setCurrentLocation] = useState(null);
+  const [destination, setDestination] = useState(null);
+
+  function handleCurrentLocationChange(newLocation) {
+    setCurrentLocation(newLocation);
+  }
+  function handleDestinationChange(newLocation) {
+    setDestination(newLocation);
+  }
   //Hardcode some items for now
   const items = ['One', 'Two', 'Three'];
 
@@ -23,14 +29,26 @@ const Main = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Text style={theme.heading}>Journey SA</Text>
+      <LocationInputs
+        onCurrentLocationChange={handleCurrentLocationChange}
+        onDestinationChange={handleDestinationChange}
+      />
+      <Text style={{ color: theme.colors.primary }}>
+        Current Location: {JSON.stringify(currentLocation)}
+      </Text>
+      <Text style={{ color: theme.colors.primary }}>
+        Destination: {JSON.stringify(destination)}
+      </Text>
       <View style={styles.listWrapper}>
         <FlatList
           data={items}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item}
           contentContainerStyle={styles.flatList}
         />
       </View>
+      <StatusBar style='auto' />
     </View>
   );
 };
@@ -38,25 +56,25 @@ const Main = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 20,
+    paddingHorizontal: 20
   },
   listWrapper: {
     flex: 0.8, // 80% height for the list
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   button: {
-    marginBottom: 10,
+    marginBottom: 10
   },
   card: {
     width: '100%',
     aspectRatio: 16 / 9,
     marginBottom: 10,
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   imageBackground: {
     width: '100%',
     height: '100%',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   title: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -66,7 +84,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textShadowColor: 'rgba(0, 0, 0, 0.5)', // Add text shadow
     textShadowOffset: { width: 0, height: 1 }, // Add text shadow
-    textShadowRadius: 1, // Add text shadow
+    textShadowRadius: 1 // Add text shadow
   },
 
   createdAtText: {
@@ -75,17 +93,17 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'right',
     paddingRight: 8,
-    paddingBottom: 4,
+    paddingBottom: 4
   },
   paragraph: {
     textAlign: 'center', // Center the 'added on' label
     backgroundColor: 'rgba(255, 255, 255, 0.8)', // Add a background to improve readability
-    paddingVertical: 4, // Add some padding
+    paddingVertical: 4 // Add some padding
   },
   flatList: {
     flexGrow: 1,
-    marginBottom: 10, // Add margin to the bottom of the FlatList
-  },
+    marginBottom: 10 // Add margin to the bottom of the FlatList
+  }
 });
 
 export default Main;

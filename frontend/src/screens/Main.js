@@ -2,7 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Card, Paragraph, Text, Title, useTheme } from 'react-native-paper';
-import LocationInputs from '../../components/locationInputs/locationInputs.component';
+import LocationInputs from '../components/locationInputs/LocationInputs';
+import { getAll } from '../data/repository/locations.repository';
 
 const Main = ({ navigation }) => {
   const theme = useTheme();
@@ -21,8 +22,11 @@ const Main = ({ navigation }) => {
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => console.log(item)}>
       <Card style={styles.card} onPress={() => console.log(item)}>
-        <Title style={styles.title}>{item}</Title>
-        <Paragraph style={styles.paragraph}>{item}</Paragraph>
+        <Title style={styles.title}>{item.name}</Title>
+        <Paragraph style={styles.paragraph}>Name: {item.name}</Paragraph>
+        <Paragraph style={styles.paragraph}>
+          Category: {item.category}
+        </Paragraph>
       </Card>
     </TouchableOpacity>
   );
@@ -34,17 +38,11 @@ const Main = ({ navigation }) => {
         onCurrentLocationChange={handleCurrentLocationChange}
         onDestinationChange={handleDestinationChange}
       />
-      <Text style={{ color: theme.colors.primary }}>
-        Current Location: {JSON.stringify(currentLocation)}
-      </Text>
-      <Text style={{ color: theme.colors.primary }}>
-        Destination: {JSON.stringify(destination)}
-      </Text>
       <View style={styles.listWrapper}>
         <FlatList
-          data={items}
+          data={getAll()}
           renderItem={renderItem}
-          keyExtractor={(item) => item}
+          keyExtractor={(item) => item.id}
           contentContainerStyle={styles.flatList}
         />
       </View>

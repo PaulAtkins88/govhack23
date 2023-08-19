@@ -1,16 +1,11 @@
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useTheme } from 'react-native-paper';
 import LocationInput from '../common/locationInput.common';
 
-export default function LocationInputs({
-  onCurrentLocationChange,
-  onDestinationChange
-}) {
+const LocationInputs = ({ onCurrentLocationChange, onDestinationChange }) => {
   const [currentLocation, setCurrentLocation] = useState(null);
   const [destination, setDestination] = useState(null);
 
-  const theme = useTheme();
   // there should be no space between the components
   const styles = StyleSheet.create({
     container: {
@@ -50,4 +45,6 @@ export default function LocationInputs({
       />
     </View>
   );
-}
+};
+
+export default LocationInputs;

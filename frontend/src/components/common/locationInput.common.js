@@ -10,6 +10,7 @@ export default function LocationInput({ label, onLocationChange, style }) {
   function handleLocationChange(text) {
     const newLocation = text;
     setLocation(newLocation);
+    console.log(location);
   }
 
   return (

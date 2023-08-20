@@ -2,15 +2,13 @@ import React, { useState } from 'react';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { TextInput } from 'react-native-paper';
 
-const GOOGLE_PLACES_API_KEY = 'AIzaSyDgzgT_3aZJ_a1lWK_juF-Zn5x-Wy8nTB8';
+const GOOGLE_PLACES_API_KEY = 'REDACTED';
 
 export default function LocationInput({ label, onLocationChange, style }) {
   const [location, setLocation] = useState('');
 
   function handleLocationChange(text) {
-    const newLocation = text;
-    setLocation(newLocation);
-    console.log(location);
+    setLocation(text);
   }
 
   return (
@@ -22,6 +20,11 @@ export default function LocationInput({ label, onLocationChange, style }) {
       onPress={(data, details) => {
         setLocation(data.description);
         onLocationChange(details.geometry.location);
+        console.log(
+          `${label} location updated: ${JSON.stringify(
+            details.geometry.location
+          )}`
+        );
       }}
       textInputProps={{
         InputComp: TextInput,
